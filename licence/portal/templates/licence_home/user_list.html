@@ -1,0 +1,70 @@
+<!-- Extend the base layout from the layout html-->
+{% extends "licence_home/layout.html" %}
+
+{% block title %} User Document {% endblock %}
+
+{% block content %}
+   <h1 class="text-center">User Documents</h1>
+   <!--{% if request.user.role == 'admin' or request.user.role == 'manager' %}
+   <a class= "btn btn-primary" href ="{% url 'user_form'%}">Add Details</a>
+   {% endif %}-->
+   <table class="table table-bordered table-stripped">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Images</th>
+            <th>Document</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user_info in Users %}
+        {% if request.user.role == 'admin' or request.user.role == 'manager' and user_info.user.role == 'resource' %}
+        <tr>
+            <td>{{ user_info.user.id }}</td>
+            <td>{{ user_info.user.username }}</td>
+            <td>{% for licence in user_info.licences %}
+                <img src="{{ licence.image.url }}" width="100" height="100"></td>
+            <!--td><embed class="pdf" src="{{ user_info.user.pdf.url }}" width="100" height="100"></td-->
+            <td>
+                <a href="{{ licence.pdf.url }}">{{ licence.name }}</a><br>
+                {% endfor %}
+            </td>
+            <td>{{ user_info.user.role }}</td>
+            <td> 
+                {% if user_info.user.username == request.user.username or request.user.role == 'admin' or request.user.role == 'manager' %}
+                <a href="{% url 'doc_update' user_info.user.user_id %}" class="btn btn-warning">Update</a>
+                <a href="{% url 'doc_delete' user.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </td>
+            
+        </tr>
+        {% endif %}
+        {% if user_info.user.username == request.user.username and user_info.user.role != 'admin' and user_info.user.role != 'manager'%}
+        <tr>
+            <td>{{ user_info.user.id }}</td>
+            <td>{{ user_info.user.username }}</td>
+            <td>{% for licence in user_info.licences %}
+                <img src="{{ licence.image.url }}" width="100" height="100"></td>
+            <!--td><embed class="pdf" src="{{ user_info.user.pdf.url }}" width="100" height="100"></td-->
+            <td>
+                <a href="{{ licence.pdf.url }}">{{ licence.name }}</a><br>
+                {% endfor %}
+            </td>
+            <td>{{ user_info.user.role }}</td>
+            <td> 
+                {% if user_info.user.username == request.user.username or request.user.role == 'admin' or request.user.role == 'manager' %}
+                <a href="{% url 'doc_update' user.id %}" class="btn btn-warning">Update</a>
+                <a href="{% url 'doc_delete' user.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </td>
+            
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+   </table>
+{% endblock %}
+ 

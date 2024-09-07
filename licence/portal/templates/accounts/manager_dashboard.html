@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Manager Dashboard</title>
+    </head>
+    <body>
+        <h1>Manager Dashboard</h1>
+        <p>Welcome, Manager!</p>
+        <h2> Resource Management</h2>
+        <a href="{% url 'logout_user' %}">Logout</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resource in resources %}
+                <tr>
+                    <td>{{ resource.id }}</td>
+                    <td>{{ resource.username }}</td>
+                    <td>{{ resource.email }}</td>
+                    <td>
+                        <a href="{% url 'edit_user' user.id %}">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

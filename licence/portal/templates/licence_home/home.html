@@ -1,0 +1,14 @@
+{% extends "licence_home/layout.html" %}
+{% load static %}
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<h1 class="Heading">Welcome, {{request.user.username}}! </h1>
+        <p ></p>
+        <!--a href="{% url 'user_form' %}">Add user!</a>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form-->
+
+{% endblock %}

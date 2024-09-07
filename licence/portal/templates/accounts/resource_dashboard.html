@@ -1,0 +1,53 @@
+<!-- Extend the base layout from the layout html-->
+{% extends "licence_home/layout.html" %}
+
+{% block title %} Add Details {% endblock %}
+
+{% block content %} 
+<h1 class="text-center">Licence Form</h1>
+<h2>{% if form.instance.pk %}
+    Edit User Details
+    {% else %}
+    Add Users Details
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success btn-block" type="submit">Save Detail</button>
+    </form>
+</h2>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+<!--DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Resource Dashboard</title>
+    </head>
+    <body>
+        <h1>Resource Dashboard</h1>
+        <a href="{% url 'logout_user' %}">Logout</a>
+        <p>Welcome, {{ resource.username}}!</p>
+
+        <h2>Your Information</h2>
+        <form method="post" action="{% url 'update_resource' resource.id %}">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" name="username" value="{{ resource.username }}" required><br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="{{ resource.email }}" required><br>
+            <button type="submit">Update</button>
+        </form>
+    </body>
+</html>

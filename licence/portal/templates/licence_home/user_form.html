@@ -1,0 +1,21 @@
+<!-- Extend the base layout from the layout html-->
+{% extends "licence_home/layout.html" %}
+
+{% block title %} Add Details {% endblock %}
+
+{% block content %} 
+<h1 class="text-center">Licence Form</h1>
+<h2>{% if form.instance.pk %}
+    Edit User Details
+    {% else %}
+    Add Users Details
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success btn-block" type="submit">Save Detail</button>
+    </form>
+</h2>
+
+{% endblock %}
+                                                                                                                                                                           
